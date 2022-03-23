@@ -26,14 +26,9 @@ export default function TopNavBar({
 
   return (
     <Navbar bg="dark" variant="dark">
-      <Container>
-        <Navbar.Brand href="#home"> ⚛️ 👋 </Navbar.Brand>
-        <Nav
-          variant="pills"
-          className="
-         justify-content-end"
-          activeKey={activeKey}
-        >
+      <Container className="mx-3 d-inline-flex justify-content-start">
+        <Navbar.Brand> ⚛️ 👋 ReactChat</Navbar.Brand>
+        <Nav variant="pills" activeKey={activeKey}>
           <Nav.Item>
             <Nav.Link eventKey={conversationsKey} onClick={() => handleActiveKey(conversationsKey)}>
               Conversations

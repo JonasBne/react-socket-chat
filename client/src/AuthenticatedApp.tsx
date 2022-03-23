@@ -7,18 +7,18 @@ const CONVERSATIONS_KEY = 'Conversations';
 const CONTACTS_KEY = 'Contacts';
 
 interface AuthenticatedAppProps {
-  chatRoomId: string;
+  id: string;
   onSignOut: () => void;
 }
 
-function AuthenticatedApp({ chatRoomId, onSignOut }: AuthenticatedAppProps) {
+function AuthenticatedApp({ id, onSignOut }: AuthenticatedAppProps) {
   const [activeKey, setActiveKey] = useState(CONVERSATIONS_KEY);
 
   const handleActiveKey = (key: string) => {
     setActiveKey(key);
   };
 
-  console.log(chatRoomId);
+  console.log(id);
   return (
     <>
       <TopNavBar
@@ -28,7 +28,7 @@ function AuthenticatedApp({ chatRoomId, onSignOut }: AuthenticatedAppProps) {
         onActiveKeyChange={handleActiveKey}
         onSignOut={onSignOut}
       />
-      {activeKey === CONVERSATIONS_KEY ? <Conversations /> : <Contacts />}
+      {activeKey === CONVERSATIONS_KEY ? <Conversations id={id} /> : <Contacts />}
     </>
   );
 }
