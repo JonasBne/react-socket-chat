@@ -9,12 +9,12 @@ const contactsSlice = createSlice({
   name: 'contacts',
   initialState: [] as Contact[],
   reducers: {
-    contactAdded(state, action: PayloadAction<Contact>) {
+    createContact(state, action: PayloadAction<Contact>) {
       state.push(action.payload);
     },
   },
 });
 
-export const { contactAdded } = contactsSlice.actions;
+export const { createContact } = contactsSlice.actions;
 
 export const contactsReducer = contactsSlice.reducer;
