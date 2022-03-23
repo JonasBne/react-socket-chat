@@ -1,27 +1,35 @@
-import React from 'react';
-import { ModalHeader, ModalBody, Form, FormGroup, FormLabel, FormControl, FormText, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { ModalHeader, ModalBody, Form, FormGroup, FormCheck } from 'react-bootstrap';
+import { useAppSelector } from '../../../app/hooks';
+import { selectContacts } from '../Contacts/ContactsSlice';
 
 export default function NewConversationModal() {
+  const contacts = useAppSelector((state) => selectContacts(state));
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [selectedContactIds, setSelectedContactIds] = useState<string[]>([]);
+
+  const handleCheckboxChange = (contactId: string) => {
+    if (contactId) {
+      setSelectedContactIds((prevContactIds) => [...prevContactIds, contactId]);
+    }
+  };
+
   return (
     <>
       <ModalHeader closeButton>Create Conversation</ModalHeader>
       <ModalBody>
         <Form>
-          <FormGroup className="py-4">
-            <FormLabel htmlFor="idInput">ID</FormLabel>
-            <FormControl name="idInput" type="text" required />
-            <FormText className="text-muted">Enter the unique ID of your contact person.</FormText>
-          </FormGroup>
-          <FormGroup className="py-4">
-            <FormLabel htmlFor="nameInput">Name</FormLabel>
-            <FormControl name="nameInput" type="text" required />
-          </FormGroup>
-          <Button type="submit" className="m-1">
-            Create
-          </Button>
-          <Button type="button" variant="danger" className="m-1">
-            Cancel
-          </Button>
+          {contacts &&
+            contacts.map((contact) => (
+              <FormGroup key={contact.contactId}>
+                <FormCheck
+                  type="checkbox"
+                  label={contact.contactName}
+                  onChange={() => handleCheckboxChange(contact.contactId)}
+                />
+              </FormGroup>
+            ))}
         </Form>
       </ModalBody>
     </>

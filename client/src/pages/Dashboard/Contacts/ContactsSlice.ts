@@ -1,13 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+// eslint-disable-next-line import/no-cycle
+import { RootState } from '../../../app/store';
 import { Contact } from '../../../domain/Contact';
 
-const contactsInLocalStorage = () => {
+const contactsInLocalStorage = (): Contact[] | null => {
   const valueInStorage = window.localStorage.getItem('react-socketio-chat-contacts');
 
   if (valueInStorage) {
     return JSON.parse(valueInStorage);
   }
-  return [];
+  return null;
 };
 
 const contactsSlice = createSlice({
@@ -15,7 +17,9 @@ const contactsSlice = createSlice({
   initialState: contactsInLocalStorage,
   reducers: {
     createContact(state, action: PayloadAction<Contact>) {
-      state.push(action.payload);
+      if (state) {
+        state.push(action.payload);
+      }
     },
   },
 });
@@ -23,3 +27,5 @@ const contactsSlice = createSlice({
 export const { createContact } = contactsSlice.actions;
 
 export const contactsReducer = contactsSlice.reducer;
+
+export const selectContacts = (state: RootState) => state.contacts;
