@@ -19,7 +19,7 @@ interface NewContactModalProps {
 }
 
 export default function NewContactModal({ onCloseModal }: NewContactModalProps) {
-  const [, setContact] = useLocalStorageState('contact', []);
+  const [, setContact] = useLocalStorageState('contacts', []);
 
   const dispatch = useAppDispatch();
 

@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Contact } from '../../../domain/Contact';
 
 const contactsInLocalStorage = () => {
-  const valueInStorage = window.localStorage.getItem('react-socketio-chat-contact');
+  const valueInStorage = window.localStorage.getItem('react-socketio-chat-contacts');
 
   if (valueInStorage) {
     return JSON.parse(valueInStorage);
