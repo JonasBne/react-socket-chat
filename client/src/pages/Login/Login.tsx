@@ -3,16 +3,21 @@ import { Container, Form, FormGroup, FormLabel, FormControl, FormText, Button } 
 
 interface LoginProps {
   chatRoomId: string;
+  onGenerateId: () => void;
   onIdChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function Login({ chatRoomId, onIdChange }: LoginProps) {
+export default function Login({ chatRoomId, onGenerateId, onIdChange }: LoginProps) {
   const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     onIdChange(evt);
   };
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+  };
+
+  const handleClick = () => {
+    onGenerateId();
   };
 
   return (
@@ -26,7 +31,7 @@ export default function Login({ chatRoomId, onIdChange }: LoginProps) {
         <Button type="submit" className="m-1">
           Login
         </Button>
-        <Button type="button" variant="light" className="m-1">
+        <Button type="button" variant="light" className="m-1" onClick={handleClick}>
           Generate ID
         </Button>
       </Form>
