@@ -1,9 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface Contact {
-  contactId: string;
-  contactName: string;
-}
+import { Contact } from '../../../domain/Contact';
 
 const contactsSlice = createSlice({
   name: 'contacts',

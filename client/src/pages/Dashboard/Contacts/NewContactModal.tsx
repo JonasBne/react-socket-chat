@@ -1,6 +1,8 @@
 import React, { FormEvent } from 'react';
 import { Button, Form, FormControl, FormGroup, FormLabel, FormText, ModalBody, ModalHeader } from 'react-bootstrap';
 import { useAppDispatch } from '../../../app/hooks';
+import { Contact } from '../../../domain/Contact';
+import useLocalStorageState from '../../../hooks/useLocalStorageState';
 import { createContact } from './ContactsSlice';
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -17,6 +19,8 @@ interface NewContactModalProps {
 }
 
 export default function NewContactModal({ onCloseModal }: NewContactModalProps) {
+  const [, setContact] = useLocalStorageState('contact', []);
+
   const dispatch = useAppDispatch();
 
   const handleSubmit = (evt: FormEvent<NewContactFormElement>) => {
@@ -28,6 +32,14 @@ export default function NewContactModal({ onCloseModal }: NewContactModalProps) 
         contactName: evt.currentTarget.elements.nameInput.value,
       }),
     );
+
+    setContact((prevContacts: Contact[]) => [
+      ...prevContacts,
+      {
+        contactId: evt.currentTarget.elements.idInput.value,
+        contactName: evt.currentTarget.elements.nameInput.value,
+      },
+    ]);
 
     onCloseModal();
   };
