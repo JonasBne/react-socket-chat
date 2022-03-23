@@ -29,7 +29,7 @@ export default function ContactsList({ id }: ContactsListProps) {
         </Button>
       </Container>
       <Modal show={modalOpen} onHide={handleCloseModal}>
-        <NewContactModal />
+        <NewContactModal onCloseModal={handleCloseModal} />
       </Modal>
     </>
   );
