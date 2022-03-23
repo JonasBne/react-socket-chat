@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import Contacts from './Contacts';
 import Conversations from './Conversations';
 
-const CONVERSATIONS_KEY = 'Conversations';
-const CONTACTS_KEY = 'Contacts';
-
 interface TopNavBarProps {
+  activeKey: string;
+  conversationsKey: string;
+  contactsKey: string;
+  onActiveKeyChange: (key: string) => void;
   onSignOut: () => void;
 }
 
-export default function TopNavBar({ onSignOut }: TopNavBarProps) {
-  const [activeKey, setActiveKey] = useState(CONVERSATIONS_KEY);
-
+export default function TopNavBar({
+  activeKey,
+  conversationsKey,
+  contactsKey,
+  onActiveKeyChange,
+  onSignOut,
+}: TopNavBarProps) {
   const handleActiveKey = (key: string) => {
-    setActiveKey(key);
+    onActiveKeyChange(key);
   };
 
   const handleSignOut = () => {
@@ -32,12 +37,12 @@ export default function TopNavBar({ onSignOut }: TopNavBarProps) {
           activeKey={activeKey}
         >
           <Nav.Item>
-            <Nav.Link eventKey={CONVERSATIONS_KEY} onClick={() => handleActiveKey(CONVERSATIONS_KEY)}>
+            <Nav.Link eventKey={conversationsKey} onClick={() => handleActiveKey(conversationsKey)}>
               <Conversations />
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey={CONTACTS_KEY} onClick={() => handleActiveKey(CONTACTS_KEY)}>
+            <Nav.Link eventKey={contactsKey} onClick={() => handleActiveKey(contactsKey)}>
               <Contacts />
             </Nav.Link>
           </Nav.Item>
