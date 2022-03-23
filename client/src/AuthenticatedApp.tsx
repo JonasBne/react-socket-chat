@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TopNavBar from './pages/Dashboard/TopNavBar';
-import Conversations from './pages/Dashboard/Conversations';
-import Contacts from './pages/Dashboard/Contacts';
+import Conversations from './pages/Dashboard/Conversations/Conversations';
+import Contacts from './pages/Dashboard/Contacts/Contacts';
 
 const CONVERSATIONS_KEY = 'Conversations';
 const CONTACTS_KEY = 'Contacts';
@@ -27,7 +27,7 @@ function AuthenticatedApp({ id, onSignOut }: AuthenticatedAppProps) {
         onActiveKeyChange={handleActiveKey}
         onSignOut={onSignOut}
       />
-      {activeKey === CONVERSATIONS_KEY ? <Conversations id={id} /> : <Contacts />}
+      {activeKey === CONVERSATIONS_KEY ? <Conversations id={id} /> : <Contacts id={id} />}
     </>
   );
 }
