@@ -1,10 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Conversation } from '../../../domain/Conversation';
 
 const conversationsSlice = createSlice({
   name: 'conversations',
-  initialState: [],
-  reducers: {},
+  initialState: [] as Conversation[],
+  reducers: {
+    createConversation(state, action: PayloadAction<Conversation>) {
+      state.push(action.payload);
+    },
+  },
 });
 
-// eslint-disable-next-line import/prefer-default-export
+export const { createConversation } = conversationsSlice.actions;
+
 export const conversationsReducer = conversationsSlice.reducer;
