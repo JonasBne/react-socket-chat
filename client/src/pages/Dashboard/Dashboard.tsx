@@ -1,6 +1,6 @@
 import React from 'react';
-import Sidebar from './Sidebar';
+import TopNavBar from './TopNavBar';
 
 export default function Dashboard() {
-  return <Sidebar />;
+  return <TopNavBar />;
 }
