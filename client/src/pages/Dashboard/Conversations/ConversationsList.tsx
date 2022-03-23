@@ -29,7 +29,7 @@ export default function ConversationsList({ id }: ConversationsListProps) {
         </Button>
       </Container>
       <Modal show={modalOpen} onHide={handleCloseModal}>
-        <NewConversationModal />
+        <NewConversationModal onCloseModal={handleCloseModal} />
       </Modal>
     </>
   );

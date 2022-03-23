@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { ModalHeader, ModalBody, Form, FormGroup, FormCheck, Button } from 'react-bootstrap';
 import { useAppSelector } from '../../../app/hooks';
-import { selectContacts } from '../Contacts/ContactsSlice';
+import { selectContacts } from '../Contacts/contactsSlice';
 
-export default function NewConversationModal() {
+interface NewConversationModalProps {
+  onCloseModal: () => void;
+}
+
+export default function NewConversationModal({ onCloseModal }: NewConversationModalProps) {
   const contacts = useAppSelector((state) => selectContacts(state));
 
   const [selectedContactIds, setSelectedContactIds] = useState<string[]>([]);
@@ -17,13 +21,19 @@ export default function NewConversationModal() {
     });
   };
 
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    onCloseModal();
+  };
+
   console.log('contacts', selectedContactIds);
 
   return (
     <>
       <ModalHeader closeButton>Create Conversation</ModalHeader>
       <ModalBody>
-        <Form>
+        <Form onSubmit={handleFormSubmit}>
           {contacts &&
             contacts.map((contact) => (
               <FormGroup key={contact.contactId}>

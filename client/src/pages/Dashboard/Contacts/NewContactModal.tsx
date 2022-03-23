@@ -3,7 +3,7 @@ import { Button, Form, FormControl, FormGroup, FormLabel, FormText, ModalBody, M
 import { useAppDispatch } from '../../../app/hooks';
 import { Contact } from '../../../domain/Contact';
 import useLocalStorageState from '../../../hooks/useLocalStorageState';
-import { createContact } from './ContactsSlice';
+import { createContact } from './contactsSlice';
 
 interface FormElements extends HTMLFormControlsCollection {
   idInput: HTMLInputElement;

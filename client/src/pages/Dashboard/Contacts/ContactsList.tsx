@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, Button, Modal, ListGroup, ListGroupItem } from 'react-bootstrap';
 import NewContactModal from './NewContactModal';
 import { useAppSelector } from '../../../app/hooks';
-import { selectContacts } from './ContactsSlice';
+import { selectContacts } from './contactsSlice';
 
 interface ContactsListProps {
   id: string;
