@@ -27,7 +27,7 @@ function App() {
   return isAuthenticated ? (
     <AuthenticatedApp id={id} onSignOut={handleSignOut} />
   ) : (
-    <Login onGenerateId={handleGenerateId} onSubmit={handleLoginSubmit} />
+    <Login id={id} onGenerateId={handleGenerateId} onSubmit={handleLoginSubmit} />
   );
 }
 

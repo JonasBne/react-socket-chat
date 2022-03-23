@@ -10,11 +10,12 @@ interface LoginFormElement extends HTMLFormElement {
 }
 
 interface LoginProps {
+  id: string;
   onGenerateId: () => void;
   onSubmit: (personalId: string) => void;
 }
 
-export default function Login({ onGenerateId, onSubmit }: LoginProps) {
+export default function Login({ id, onGenerateId, onSubmit }: LoginProps) {
   const handleClick = () => {
     onGenerateId();
   };
@@ -29,7 +30,7 @@ export default function Login({ onGenerateId, onSubmit }: LoginProps) {
       <Form className="w-100" onSubmit={handleSubmit}>
         <FormGroup>
           <FormLabel htmlFor="personalIdInput">Personal ID</FormLabel>
-          <FormControl name="personalIdInput" type="text" required />
+          <FormControl name="personalIdInput" type="text" required defaultValue={id} />
           <FormText className="text-muted">Choose your own ID or generate a random number.</FormText>
         </FormGroup>
         <Button type="submit" className="m-1">
