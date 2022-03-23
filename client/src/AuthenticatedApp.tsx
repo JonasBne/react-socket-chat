@@ -18,7 +18,6 @@ function AuthenticatedApp({ id, onSignOut }: AuthenticatedAppProps) {
     setActiveKey(key);
   };
 
-  console.log(id);
   return (
     <>
       <TopNavBar
