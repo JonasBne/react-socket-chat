@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Conversation } from '../../../domain/Conversation';
+import { NewConversation } from '../../../domain/Conversation';
 
 const conversationsSlice = createSlice({
   name: 'conversations',
-  initialState: [] as Conversation[],
+  initialState: [] as NewConversation[],
   reducers: {
-    createConversation(state, action: PayloadAction<Conversation>) {
+    createConversation(state, action: PayloadAction<NewConversation>) {
       state.push(action.payload);
     },
   },

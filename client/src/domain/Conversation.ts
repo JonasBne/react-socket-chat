@@ -8,3 +8,7 @@ export interface Conversation {
   recipients: Contact[];
   messages: Message[];
 }
+
+export interface NewConversation {
+  recipients: Contact[];
+}

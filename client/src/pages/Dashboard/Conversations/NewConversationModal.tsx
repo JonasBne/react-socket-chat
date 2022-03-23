@@ -1,13 +1,23 @@
 import React, { FormEvent, useState } from 'react';
 import { ModalHeader, ModalBody, Form, FormGroup, FormCheck, Button } from 'react-bootstrap';
-import { useAppSelector } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectContacts } from '../Contacts/contactsSlice';
+import { createConversation } from './ConversationsSlice';
+
+interface FormElements extends HTMLFormControlsCollection {
+  contactNameInput: string;
+}
+
+interface CreateConversationFormElement extends HTMLFormElement {
+  readonly elements: FormElements;
+}
 
 interface NewConversationModalProps {
   onCloseModal: () => void;
 }
 
 export default function NewConversationModal({ onCloseModal }: NewConversationModalProps) {
+  const dispatch = useAppDispatch();
   const contacts = useAppSelector((state) => selectContacts(state));
 
   const [selectedContactIds, setSelectedContactIds] = useState<string[]>([]);
@@ -21,13 +31,21 @@ export default function NewConversationModal({ onCloseModal }: NewConversationMo
     });
   };
 
-  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (evt: FormEvent<CreateConversationFormElement>) => {
     evt.preventDefault();
+
+    if (selectedContactIds.length > 0 && contacts) {
+      const selectedRecipients = contacts.filter((contact) => selectedContactIds.includes(contact.contactId));
+
+      dispatch(
+        createConversation({
+          recipients: selectedRecipients,
+        }),
+      );
+    }
 
     onCloseModal();
   };
-
-  console.log('contacts', selectedContactIds);
 
   return (
     <>
@@ -38,6 +56,7 @@ export default function NewConversationModal({ onCloseModal }: NewConversationMo
             contacts.map((contact) => (
               <FormGroup key={contact.contactId}>
                 <FormCheck
+                  name="contactNameInput"
                   type="checkbox"
                   label={contact.contactName}
                   onChange={() => handleCheckboxChange(contact.contactId)}
