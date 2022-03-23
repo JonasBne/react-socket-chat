@@ -8,12 +8,9 @@ function App() {
   const [id, setId] = useLocalStorageState('id', '');
   const [isAuthenticated, setIsAuthenticated] = useLocalStorageState('authentication', false);
 
-  const handleInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    setId(evt.target.value);
-  };
-
-  const handleLoginSubmit = () => {
-    if (id.trim().length > 0) {
+  const handleLoginSubmit = (personalId: string) => {
+    if (personalId.trim().length > 0) {
+      setId(personalId);
       setIsAuthenticated(true);
     }
   };
@@ -30,12 +27,7 @@ function App() {
   return isAuthenticated ? (
     <AuthenticatedApp id={id} onSignOut={handleSignOut} />
   ) : (
-    <Login
-      chatRoomId={id}
-      onIdChange={handleInputChange}
-      onGenerateId={handleGenerateId}
-      onSubmit={handleLoginSubmit}
-    />
+    <Login onGenerateId={handleGenerateId} onSubmit={handleLoginSubmit} />
   );
 }
 

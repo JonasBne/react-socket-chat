@@ -1,33 +1,35 @@
-import React, { ChangeEvent, FormEvent } from 'react';
+import React, { FormEvent } from 'react';
 import { Container, Form, FormGroup, FormLabel, FormControl, FormText, Button } from 'react-bootstrap';
 
-interface LoginProps {
-  chatRoomId: string;
-  onGenerateId: () => void;
-  onIdChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: () => void;
+interface FormElements extends HTMLFormControlsCollection {
+  personalIdInput: HTMLInputElement;
 }
 
-export default function Login({ chatRoomId, onGenerateId, onIdChange, onSubmit }: LoginProps) {
-  const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    onIdChange(evt);
-  };
+interface LoginFormElement extends HTMLFormElement {
+  readonly elements: FormElements;
+}
 
+interface LoginProps {
+  onGenerateId: () => void;
+  onSubmit: (personalId: string) => void;
+}
+
+export default function Login({ onGenerateId, onSubmit }: LoginProps) {
   const handleClick = () => {
     onGenerateId();
   };
 
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (evt: FormEvent<LoginFormElement>) => {
     evt.preventDefault();
-    onSubmit();
+    onSubmit(evt.currentTarget.elements.personalIdInput.value);
   };
 
   return (
     <Container className="d-flex align-items-center" style={{ height: '100vh' }}>
       <Form className="w-100" onSubmit={handleSubmit}>
-        <FormGroup controlId="login-form">
-          <FormLabel>Chatroom ID</FormLabel>
-          <FormControl type="text" required onChange={handleInputChange} value={chatRoomId} />
+        <FormGroup>
+          <FormLabel htmlFor="personalIdInput">Personal ID</FormLabel>
+          <FormControl name="personalIdInput" type="text" required />
           <FormText className="text-muted">Choose your own ID or generate a random number.</FormText>
         </FormGroup>
         <Button type="submit" className="m-1">
