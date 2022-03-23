@@ -6,19 +6,36 @@ import AuthenticatedApp from './AuthenticatedApp';
 
 function App() {
   const [chatRoomId, setChatRoomId] = useLocalStorageState('chatRoomId', '');
+  const [isAuthenticated, setIsAuthenticated] = useLocalStorageState('authentication', false);
 
   const handleInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setChatRoomId(evt.target.value);
+  };
+
+  const handleLoginSubmit = () => {
+    if (chatRoomId.trim().length > 0) {
+      setIsAuthenticated(true);
+    }
+  };
+
+  const handleSignOut = () => {
+    setChatRoomId('');
+    setIsAuthenticated(false);
   };
 
   const handleGenerateId = () => {
     setChatRoomId(uuidv4());
   };
 
-  return chatRoomId ? (
-    <AuthenticatedApp chatRoomId={chatRoomId} />
+  return isAuthenticated ? (
+    <AuthenticatedApp chatRoomId={chatRoomId} onSignOut={handleSignOut} />
   ) : (
-    <Login chatRoomId={chatRoomId} onIdChange={handleInputChange} onGenerateId={handleGenerateId} />
+    <Login
+      chatRoomId={chatRoomId}
+      onIdChange={handleInputChange}
+      onGenerateId={handleGenerateId}
+      onSubmit={handleLoginSubmit}
+    />
   );
 }
 

@@ -6,11 +6,19 @@ import Conversations from './Conversations';
 const CONVERSATIONS_KEY = 'Conversations';
 const CONTACTS_KEY = 'Contacts';
 
-export default function TopNavBar() {
+interface TopNavBarProps {
+  onSignOut: () => void;
+}
+
+export default function TopNavBar({ onSignOut }: TopNavBarProps) {
   const [activeKey, setActiveKey] = useState(CONVERSATIONS_KEY);
 
   const handleActiveKey = (key: string) => {
     setActiveKey(key);
+  };
+
+  const handleSignOut = () => {
+    onSignOut();
   };
 
   return (
@@ -34,7 +42,7 @@ export default function TopNavBar() {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link>Sign Out</Nav.Link>
+            <Nav.Link onClick={handleSignOut}>Sign Out</Nav.Link>
           </Nav.Item>
         </Nav>
       </Container>

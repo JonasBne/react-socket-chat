@@ -5,24 +5,26 @@ interface LoginProps {
   chatRoomId: string;
   onGenerateId: () => void;
   onIdChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: () => void;
 }
 
-export default function Login({ chatRoomId, onGenerateId, onIdChange }: LoginProps) {
+export default function Login({ chatRoomId, onGenerateId, onIdChange, onSubmit }: LoginProps) {
   const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     onIdChange(evt);
-  };
-
-  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
   };
 
   const handleClick = () => {
     onGenerateId();
   };
 
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    onSubmit();
+  };
+
   return (
     <Container className="d-flex align-items-center" style={{ height: '100vh' }}>
-      <Form className="w-100" onSubmit={handleFormSubmit}>
+      <Form className="w-100" onSubmit={handleSubmit}>
         <FormGroup controlId="login-form">
           <FormLabel>Chatroom ID</FormLabel>
           <FormControl type="text" required onChange={handleInputChange} value={chatRoomId} />
