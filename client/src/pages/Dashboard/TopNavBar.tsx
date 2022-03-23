@@ -1,7 +1,5 @@
 import React from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
-import Contacts from './Contacts';
-import Conversations from './Conversations';
 
 interface TopNavBarProps {
   activeKey: string;
@@ -38,12 +36,12 @@ export default function TopNavBar({
         >
           <Nav.Item>
             <Nav.Link eventKey={conversationsKey} onClick={() => handleActiveKey(conversationsKey)}>
-              <Conversations />
+              Conversations
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link eventKey={contactsKey} onClick={() => handleActiveKey(contactsKey)}>
-              <Contacts />
+              Contacts
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
