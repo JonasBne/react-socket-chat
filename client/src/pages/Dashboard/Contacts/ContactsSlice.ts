@@ -8,8 +8,13 @@ interface Contact {
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: [] as Contact[],
-  reducers: {},
+  reducers: {
+    contactAdded(state, action) {
+      state.push(action.payload);
+    },
+  },
 });
 
-// eslint-disable-next-line import/prefer-default-export
+export const { contactAdded } = contactsSlice.actions;
+
 export const contactsReducer = contactsSlice.reducer;
