@@ -1,6 +1,5 @@
 import React from 'react';
-import TopNavBar from './TopNavBar';
 
 export default function Dashboard() {
-  return <TopNavBar />;
+  return <div>Dashboard</div>;
 }

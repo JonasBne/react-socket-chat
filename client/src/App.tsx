@@ -2,7 +2,7 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Login from './pages/Login/Login';
 import useLocalStorageState from './hooks/useLocalStorageState';
-import Dashboard from './pages/Dashboard/Dashboard';
+import AuthenticatedApp from './AuthenticatedApp';
 
 function App() {
   const [chatRoomId, setChatRoomId] = useLocalStorageState('chatRoomId', '');
@@ -16,7 +16,7 @@ function App() {
   };
 
   return chatRoomId ? (
-    <Dashboard />
+    <AuthenticatedApp chatRoomId={chatRoomId} />
   ) : (
     <Login chatRoomId={chatRoomId} onIdChange={handleInputChange} onGenerateId={handleGenerateId} />
   );

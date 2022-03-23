@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
+import Contacts from './Contacts';
+import Conversations from './Conversations';
 
 const CONVERSATIONS_KEY = 'Conversations';
 const CONTACTS_KEY = 'Contacts';
@@ -23,12 +25,12 @@ export default function TopNavBar() {
         >
           <Nav.Item>
             <Nav.Link eventKey={CONVERSATIONS_KEY} onClick={() => handleActiveKey(CONVERSATIONS_KEY)}>
-              Conversations
+              <Conversations />
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link eventKey={CONTACTS_KEY} onClick={() => handleActiveKey(CONTACTS_KEY)}>
-              Contacts
+              <Contacts />
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
