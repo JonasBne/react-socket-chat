@@ -1,5 +1,7 @@
 import React, { FormEvent } from 'react';
 import { Button, Form, FormControl, FormGroup, FormLabel, FormText, ModalBody, ModalHeader } from 'react-bootstrap';
+import { useAppDispatch } from '../../../app/hooks';
+import { contactAdded } from './ContactsSlice';
 
 interface FormElements extends HTMLFormControlsCollection {
   idInput: HTMLInputElement;
@@ -15,8 +17,18 @@ interface NewContactModalProps {
 }
 
 export default function NewContactModal({ onCloseModal }: NewContactModalProps) {
+  const dispatch = useAppDispatch();
+
   const handleSubmit = (evt: FormEvent<NewContactFormElement>) => {
     evt.preventDefault();
+
+    dispatch(
+      contactAdded({
+        contactId: evt.currentTarget.elements.idInput.value,
+        contactName: evt.currentTarget.elements.nameInput.value,
+      }),
+    );
+
     onCloseModal();
   };
 

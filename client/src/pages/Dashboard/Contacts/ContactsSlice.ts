@@ -1,15 +1,15 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Contact {
-  id: string;
-  name: string;
+  contactId: string;
+  contactName: string;
 }
 
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: [] as Contact[],
   reducers: {
-    contactAdded(state, action) {
+    contactAdded(state, action: PayloadAction<Contact>) {
       state.push(action.payload);
     },
   },
